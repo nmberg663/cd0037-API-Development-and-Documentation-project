@@ -77,7 +77,7 @@ The Trivia API will return the following error codes:
 
 Endpoints
 
-`GET '/categories'
+`GET '/trivia_api/v1.01/categories'
 
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
@@ -110,7 +110,7 @@ Return json example:
 ```
 
 Curl Example:
-$ curl -X GET localhost:5000/categories
+$ curl -X GET localhost:5000/trivia_api/v1.01/categories
 {
   "categories": [
     [
@@ -134,7 +134,7 @@ $ curl -X GET localhost:5000/categories
   ]
 
 
-GET '/questions?page=1'
+GET '/trivia_api/v1.01/questions?page=1'
 
 - Fetches paginated questions (currently defined as up to 10 questions) based on the input page number
 - Request Arguments: page number to display
@@ -153,7 +153,7 @@ Return json example:
 
 Curl Examples:
 SUCCESS:
-$ curl -X GET localhost:5000/questions?page=1
+$ curl -X GET localhost:5000/trivia_api/v1.01/questions?page=1
 {
   "categories": [
     "Science", 
@@ -240,7 +240,7 @@ $ curl -X GET localhost:5000/questions?page=1
 }
 
 ERROR
-$ curl -X GET localhost:5000/questions?page=1000
+$ curl -X GET localhost:5000/trivia_api/v1.01/questions?page=1000
 {
   "error": 404, 
   "message": "NotFound", 
@@ -248,7 +248,7 @@ $ curl -X GET localhost:5000/questions?page=1000
 }
 
 
-DELETE '/questions/<int:question_id>'
+DELETE '/trivia_api/v1.01/questions/<int:question_id>'
 
 - Deletes the question associated with the input question_id
 - Request Arguments: question_id is the 'id' of the question to be deleted
@@ -264,19 +264,19 @@ Return json example:
 
 Curl Examples:
 SUCCESS
-$ curl -X DELETE localhost:5000/questions/59
+$ curl -X DELETE localhost:5000/trivia_api/v1.01/questions/59
 {
   "success": true
 }
 ERROR
-$ curl -X DELETE localhost:5000/questions/590
+$ curl -X DELETE localhost:5000/trivia_api/v1.01/questions/590
 {
   "error": 422, 
   "message": "unprocessable", 
   "success": false
 }
 
-POST '/questions'
+POST '/trivia_api/v1.01/questions'
 - Returns a list of questions based on an input search term
 - Request Arguments: provide a json object containing 'searchTerm' and the value to use in the search
 - Returns: If questions are found that match the search term, a list of questions containing the search term
@@ -301,7 +301,7 @@ Return json example:
 
 Curl examples:
 SUCCESS
-$ curl -X POST localhost:5000/questions -H "content-Type: application/json" -d '{"searchTerm": "name"}'
+$ curl -X POST localhost:5000/trivia_api/v1.01/questions -H "content-Type: application/json" -d '{"searchTerm": "name"}'
 {
   "currentCategory": "History", 
   "questions": [
@@ -323,14 +323,14 @@ $ curl -X POST localhost:5000/questions -H "content-Type: application/json" -d '
   "totalQuestions": 2
 }
 ERROR
-$ curl -X POST localhost:5000/questions -H "content-Type: application/json" -d '{"searchTerm": "not found"}'
+$ curl -X POST localhost:5000/trivia_api/v1.01/questions -H "content-Type: application/json" -d '{"searchTerm": "not found"}'
 {
   "error": 404, 
   "message": "NotFound", 
   "success": false
 }
 
-POST '/questions'
+POST '/trivia_api/v1.01/questions'
 - Using the provided input json containing data for a single question, adds the question to the questions table
 - Request Arguments: Provide a json object containing the following: question (text), answer(text), difficulty(1..5), category(1..6)
 - Returns: 
@@ -355,19 +355,19 @@ Return json example for successful add:
 
 Curl Examples:
 SUCCESS
-$ curl -X POST localhost:5000/questions -H "content-Type: application/json" -d '{"question": "This is an Art question number 2?", "answer": "Art", "difficulty": 1, "category": "1"}'
+$ curl -X POST localhost:5000/trivia_api/v1.01/questions -H "content-Type: application/json" -d '{"question": "This is an Art question number 2?", "answer": "Art", "difficulty": 1, "category": "1"}'
 {
   "success": true
 }
 ERROR:
-$ curl -X POST localhost:5000/questions -H "content-Type: application/json" -d '{"question": "This is an Art question number 2?", "answer": "Art", "difficulty": 1, "category": "1"}'
+$ curl -X POST localhost:5000/trivia_api/v1.01/questions -H "content-Type: application/json" -d '{"question": "This is an Art question number 2?", "answer": "Art", "difficulty": 1, "category": "1"}'
 {
   "error": 404, 
   "message": "NotFound", 
   "success": false
 }
 
-GET '/categories/<int:cat_id>/questions'
+GET '/trivia_api/v1.01/categories/<int:cat_id>/questions'
 - Returns a list of questions based on the input category id .. though this id is one less than the categories 'id' since it is an index into the categories (which starts at zero)
 - Request Arguments: category id index.  This is one less than the categories 'id' since it is an index into the categories (which starts at zero) 
 - Returns: Returns a list of questions matching the category provided
@@ -394,7 +394,7 @@ Return json example:
 
 Curl Examples:
 SUCCESS
-$ curl -X GET localhost:5000/categories/0/questions
+$ curl -X GET localhost:5000/trivia_api/v1.01/categories/0/questions
 {
   "currentCategory": [
     "Science"
@@ -445,14 +445,14 @@ $ curl -X GET localhost:5000/categories/0/questions
   "totalQuestions": 6
 }
 ERROR
-$ curl -X GET localhost:5000/categories/10/questions
+$ curl -X GET localhost:5000/trivia_api/v1.01/categories/10/questions
 {
   "error": 422, 
   "message": "unprocessable", 
   "success": false
 }
 
-POST '/quizzes'
+POST '/trivia_api/v1.01/quizzes'
 
 - Returns the first (or next) question in the selected category quiz.  The quiz consists of 5 random questions in a selected category OR random question in all categories (specified by category name "click')
 - Request Arguments: json object containing
@@ -484,7 +484,7 @@ Return json example:
 
 Curl Examples:
 SUCCESS
-$ curl -X POST localhost:5000/quizzes -H "content-Type: application/json" -d '{"previous_questions": [], "quiz_category": {"type": ["Science"], "id": "0"}}'
+$ curl -X POST localhost:5000/trivia_api/v1.01/quizzes -H "content-Type: application/json" -d '{"previous_questions": [], "quiz_category": {"type": ["Science"], "id": "0"}}'
 {
   "question": {
     "answer": "Elephant", 
@@ -496,7 +496,7 @@ $ curl -X POST localhost:5000/quizzes -H "content-Type: application/json" -d '{"
 }
 
 ERROR
-$ curl -X POST localhost:5000/quizzes -H "content-Type: application/json" -d '{"previous_questions": [], "quiz_category": {"type": ["Science"], "id": "0"}}'
+$ curl -X POST localhost:5000/trivia_api/v1.01/quizzes -H "content-Type: application/json" -d '{"previous_questions": [], "quiz_category": {"type": ["Science"], "id": "0"}}'
 {
   "error": 422, 
   "message": "unprocessable", 

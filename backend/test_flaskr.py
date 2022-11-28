@@ -47,7 +47,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_get_all_categories(self):
         print("test_get_all_categories")
-        res = self.client().get("/categories")
+        res = self.client().get("/trivia_api/v1.01/categories")
         self.assertTrue(res.status_code == 200)
         data = json.loads(res.data)
         categories = data['categories']
@@ -75,7 +75,7 @@ class TriviaTestCase(unittest.TestCase):
         print("test_Get_paginated_questions")
         db_questions = Question.query.all()
         len_db_questions = len(db_questions)
-        res = self.client().get("/questions?page=1")
+        res = self.client().get("/trivia_api/v1.01/questions?page=1")
         data = json.loads(res.data)
         self.assertTrue(res.status_code == 200)
 
@@ -97,14 +97,14 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_get_paginated_questions_404(self):
         print("test_getPaginated_questions_404")
-        res = self.client().get("/questions?page=10")
+        res = self.client().get("/trivia_api/v1.01/questions?page=10")
         self.assertTrue(res.status_code == 404)
         pass
 
     def test_get_questions_by_search(self):
         print("test_get_questions_by_search")
         try:
-            res = self.client().post("/questions", json={'searchTerm': 'name'})
+            res = self.client().post("/trivia_api/v1.01/questions", json={'searchTerm': 'name'})
             data = json.loads(res.data)
             returned_questions = data['questions']
             len_returned_questions = len(returned_questions)
@@ -117,7 +117,7 @@ class TriviaTestCase(unittest.TestCase):
     def test_get_questions_by_search_404(self):
         print("test_get_questions_by_search_400")
         try:
-            res = self.client().post("/questions", json={'searchTerm': 'not found'})
+            res = self.client().post("/trivia_api/v1.01/questions", json={'searchTerm': 'not found'})
             self.assertTrue(res.status_code == 404)
         except:
             self.assertTrue(False)
@@ -126,12 +126,12 @@ class TriviaTestCase(unittest.TestCase):
     def test_add_question(self):
         print("test_add_question")
         try:
-            new_question = 'How many fingers and toes do homosapiens normally have?'
+            new_question = 'How many fingers and toes do homostrivia_apiens normally have?'
             new_answer = 10
             new_difficulty = 1
             #input index of category (which indexes start at 0 = Science)
             new_category = 0
-            res = self.client().post("/questions", json={'question': new_question, 'answer': new_answer, 'difficulty': new_difficulty, 'category': new_category})
+            res = self.client().post("/trivia_api/v1.01/questions", json={'question': new_question, 'answer': new_answer, 'difficulty': new_difficulty, 'category': new_category})
             data = json.loads(res.data)
             self.assertTrue(data['success'] == True)
 
@@ -147,12 +147,12 @@ class TriviaTestCase(unittest.TestCase):
     def test_add_question_invalid_category_404(self):
         print("test_add_question_invalid_category_404")
         try:
-            new_question = "How many fingers and toes do homosapiens normally have?"
+            new_question = "How many fingers and toes do homostrivia_apiens normally have?"
             new_answer = '10';
             new_difficulty = 1;
             #category range based on index is 0..5 input value > 5
             new_category = 8;
-            res = self.client().post("/questions", json={'question': new_question, 'answer': new_answer, 'difficulty': new_difficulty, 'category': new_category})
+            res = self.client().post("/trivia_api/v1.01/questions", json={'question': new_question, 'answer': new_answer, 'difficulty': new_difficulty, 'category': new_category})
             self.assertTrue(res.status_code == 404)
         except:
             self.assertTrue(False)
@@ -168,7 +168,7 @@ class TriviaTestCase(unittest.TestCase):
             answer_22 = existing_question.answer
             difficulty_22 = existing_question.difficulty
             category_22 = existing_question.category - 1
-            res = self.client().post("/quesetions", json={'question': question_22, 'answer': answer_22, 'difficulty': difficulty_22, 'category': category_22})
+            res = self.client().post("/trivia_api/v1.01/quesetions", json={'question': question_22, 'answer': answer_22, 'difficulty': difficulty_22, 'category': category_22})
             self.assertTrue(res.status_code == 404)
         except:
             self.assertTrue(False)
@@ -185,7 +185,7 @@ class TriviaTestCase(unittest.TestCase):
             new_question_id = added_question.id
 
             #Now call API to delete the newly added question
-            res = self.client().delete("/questions/"+str(new_question_id))
+            res = self.client().delete("/trivia_api/v1.01/questions/"+str(new_question_id))
             data = json.loads(res.data)
             self.assertTrue(data['success'] == True)
             deleted_question = Question.query.filter(Question.id==new_question_id).one_or_none()
@@ -202,7 +202,7 @@ class TriviaTestCase(unittest.TestCase):
             delete_question_id = 70
 
             #Now call API to delete the question that does not exist
-            res = self.client().delete("/questions/"+str(delete_question_id))
+            res = self.client().delete("/trivia_api/v1.01/questions/"+str(delete_question_id))
             data = json.loads(res.data)
             self.assertTrue(data['success'] == False)
             print('res.status_code: ', str(res.status_code))
@@ -224,7 +224,7 @@ class TriviaTestCase(unittest.TestCase):
                 category_questions = Question.query.filter(Question.category==category_id).all()
                 num_category_questions = len(category_questions)
 
-                res = self.client().get("/categories/"+str(i)+"/questions")
+                res = self.client().get("/trivia_api/v1.01/categories/"+str(i)+"/questions")
 
                 self.assertTrue(res.status_code == 200)
 
@@ -242,7 +242,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_get_questions_by_non_exiting_category_id_400(self):
         print("test_get_questions_by_non_existing_category_id_404")
-        res = self.client().get("/categories/10/questions")
+        res = self.client().get("/trivia_api/v1.01/categories/10/questions")
         self.assertTrue(res.status_code == 422)
 
     def test_quizzes_using_category_entertainment(self):
@@ -275,7 +275,7 @@ class TriviaTestCase(unittest.TestCase):
             previous_questions = []
             quiz_category =  {'type': ['Entertainment'], 'id': '4'}
             for i in range(0,5):
-                res = self.client().post("/quizzes", json={'previous_questions': previous_questions, 'quiz_category': quiz_category})               
+                res = self.client().post("/trivia_api/v1.01/quizzes", json={'previous_questions': previous_questions, 'quiz_category': quiz_category})               
                 self.assertTrue(res.status_code == 200)
                 data = json.loads(res.data)
                 next_question = data['question']
@@ -299,7 +299,7 @@ class TriviaTestCase(unittest.TestCase):
             category_str = quiz_category['type']
             self.assertTrue(category_str == all_category)
             for i in range(0,5):
-                res = self.client().post("/quizzes", json={'previous_questions': previous_questions, 'quiz_category': quiz_category})
+                res = self.client().post("/trivia_api/v1.01/quizzes", json={'previous_questions': previous_questions, 'quiz_category': quiz_category})
                 self.assertTrue(res.status_code == 200)
                 data = json.loads(res.data)
                 next_question = data['question']
@@ -322,7 +322,7 @@ class TriviaTestCase(unittest.TestCase):
             #For this API, the category is the index of the category which starts at 0 instead of 1
             quiz_category =  {'type': ['Science'], 'id': '0'}
             for i in range(0,5):
-                res = self.client().post("/quizzes", json={'previous_questions': previous_questions, 'quiz_category': quiz_category})
+                res = self.client().post("/trivia_api/v1.01/quizzes", json={'previous_questions': previous_questions, 'quiz_category': quiz_category})
                 if i < science_questions.count():
                     self.assertTrue(res.status_code == 200)
                     data = json.loads(res.data)

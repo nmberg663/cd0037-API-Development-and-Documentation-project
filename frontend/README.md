@@ -65,7 +65,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ### Expected endpoints and behaviors
 
-`GET '/categories'`
+`GET '/trivia_api/v1.01/categories'`
 
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
@@ -86,7 +86,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ---
 
-`GET '/questions?page=${integer}'`
+`GET '/trivia_api/v1.01/questions?page=${integer}'`
 
 - Fetches a paginated set of questions, a total number of questions, all categories and current category string.
 - Request Arguments: `page` - integer
@@ -118,7 +118,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ---
 
-`GET '/categories/${id}/questions'`
+`GET '/trivia_api/v1.01/categories/${id}/questions'`
 
 - Fetches questions for a cateogry specified by id request argument
 - Request Arguments: `id` - integer
@@ -142,7 +142,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ---
 
-`DELETE '/questions/${id}'`
+`DELETE '/trivia_api/v1.01/questions/${id}'`
 
 - Deletes a specified question using the id of the question
 - Request Arguments: `id` - integer
@@ -150,7 +150,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ---
 
-`POST '/quizzes'`
+`POST '/trivia_api/v1.01/quizzes'`
 
 - Sends a post request in order to get the next question
 - Request Body:
@@ -158,7 +158,7 @@ You can optionally update this game play to increase the number of questions or 
 ```json
 {
     'previous_questions': [1, 4, 20, 15]
-    'quiz_category': 'current category'
+    'quiz_category': {'type': 'current category', 'id': '1'}
  }
 ```
 
@@ -178,7 +178,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ---
 
-`POST '/questions'`
+`POST '/trivia_api/v1.01/questions'`
 
 - Sends a post request in order to add a new question
 - Request Body:
@@ -196,7 +196,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ---
 
-`POST '/questions'`
+`POST '/trivia_api/v1.01/questions'`
 
 - Sends a post request in order to search for a specific question by search term
 - Request Body:
