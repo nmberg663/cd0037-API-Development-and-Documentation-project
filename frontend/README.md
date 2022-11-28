@@ -158,7 +158,7 @@ You can optionally update this game play to increase the number of questions or 
 ```json
 {
     'previous_questions': [1, 4, 20, 15]
-    quiz_category': 'current category'
+    'quiz_category': 'current category'
  }
 ```
 
@@ -203,7 +203,7 @@ You can optionally update this game play to increase the number of questions or 
 
 ```json
 {
-  "searchTerm": "this is the term the user is looking for"
+  "searchTerm": "question"
 }
 ```
 
