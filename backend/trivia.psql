@@ -143,6 +143,28 @@ COPY public.questions (id, question, answer, difficulty, category) FROM stdin;
 21	Who discovered penicillin?	Alexander Fleming	3	1
 22	Hematology is a branch of medicine involving the study of what?	Blood	4	1
 23	Which dung beetle was worshipped by the ancient Egyptians?	Scarab	4	4
+24	Would you weigh more or less on Mars?	Less	2	1
+25	What is the largest planet?	Jupiter	1	1
+26	What is the largest bone in the human body?	Femur	2	1
+27	How many states of matter are there?	4	3	1
+28	What process do bats use to locate their prey?	Echolocation	2	1
+29	Which city in Italy is famous for its canals?	Venice	1	3
+30	What metal is found at the center of the Earth?	Iron	3	3
+31	What is the tallest mountain in the world?	Mount Everest	1	3
+32	Art used to be an olympic event, True or False?	True	1	2
+33	What is the Japanese art of flower arrangement called?	Ikebana	5	2
+34	Baroque art was a movement that was encouraged mainly by which religion?	Catholic	3	2
+35	What artist sold a balloon dog for $58.4 million?	Jeff Koons	5	2
+36	La Giaconda is better known as what?	Mona Lisa	5	2
+37	Which era marked a switch from agricultural practices to industrial practices?	The Industrial Revolution	4	4
+38	The 19th Amendment guarantees ____ the right to vote	Womman	2	4
+39	Who was the fictional character Shrek marries in his titular film series?	Princess Fiona	1	5
+40	Who was captain of Titanic?	Edward Smith	3	5
+41	Who is the famous author of the Harry Potter book series?	J.K. Rowling	1	5
+42	What’s the diameter of a basketball hoop in inches?	18 inches	3	6
+43	What do you call it when a bowler makes three strikes in a row?	Turkey	2	6
+44	What’s the national sport of Canada?	Lacrosse	5	6
+45	In the 1971 Olympics, Nadia Comaneci was the first gymnast to score a perfect score. What country was she representing?	Romania	1	6
 \.
 
 
