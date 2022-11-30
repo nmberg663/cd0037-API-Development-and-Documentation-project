@@ -264,6 +264,7 @@ def create_app(test_config=None):
             if selectedQuestion != None:
 
                 return jsonify({
+                     "success": True,
                      "question": {
                          "id": selectedQuestion.id,
                          "question": selectedQuestion.question,
@@ -273,8 +274,10 @@ def create_app(test_config=None):
                      }
                   })
             else:
-                print('no more questions left')
-                abort(401)
+                return jsonify({
+                     "success": True,
+                     "question": None 
+                  })
 
 
         except:
